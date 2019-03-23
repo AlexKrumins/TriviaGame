@@ -23,7 +23,7 @@
 
         <!-- jquery -->
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script type="text/javascript" src="assets/javascript/app.js"></script>
+        <!-- <script type="text/javascript" src="assets/javascript/app.js"></script> -->
         <script>
         window.onload = function(){
             // timer
@@ -34,30 +34,43 @@
                     listquestion: "Who does Number Two work for?",
                     answer: "Dr. Evil",
                     wronganswers: ["Mr. Evil", "Lorne Michaels", "Anyone with Metamucil"],
-            },];
+                },
+                {
+                    listquestion: "From what country to Fortune Cookies originate?",
+                    answer: "USA",
+                    wronganswers: ["China", "Taiwan", "Thailand"],
+                },
+            ];
             var currentQuestion = 0
-            $("#newGame").click(function() {
-                var displayQuestion = listquestionArray[currentQuestion].listquestion;
-                var wronganswers = listquestionArray[currentQuestion].wronganswers;
-                var answer = listquestionArray[currentQuestion].answer;
+            $("#newGame").click(newPage)
+            
+            function newPage() {
+                $("#evaluation").empty();
+                var questionData = listquestionArray[currentQuestion];
+                var displayQuestion = questionData.listquestion;
+                var wronganswers = questionData.wronganswers;
+                var answer = questionData.answer;
                 wronganswers.push(answer);
                 console.log(wronganswers);
+
                 $("#questionDisplay").text(displayQuestion);
                 for(i = 0; i < wronganswers.length; i++){
-                    var answerbutton = $("<li>").text(wronganswers[i]).attr("data", wronganswers[i]);;
+                    var answerbutton = $("<button>").text(wronganswers[i]).attr("data-name", wronganswers[i]).addClass("guess");;
                     $("#answersList").prepend(answerbutton);
-                    currentQuestion ++
                 }; 
-            });
+                currentQuestion ++;
+
+                $(".guess").click(function(){
+                    if ($(this).attr("data-name") === answer){
+                        $("#evaluation").text("You're frickin' right!");
+                    } else {
+                        $("#evaluation").text("So sorry. The correct answer was " + answer);
+                    };
+                    $("#questionDisplay").empty();
+                    $("#answersList").empty();
+                });
             // 
-            $("li").click(function(){
-                if (this.data === answer){
-                    $("#evaluation").text("You're frickin' right!");
-                } else {
-                    $("#evaluation").text("So sorry. The correct answer was " + answer);
-                    
-                };
-            });
+            };
             // display
             // finalscore
             // newGame
