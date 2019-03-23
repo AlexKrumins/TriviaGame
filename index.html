@@ -15,10 +15,11 @@
         <div id="title">It's Trivia O'clock!</div>
         <div id="timer"></div>
         <div id="questionDisplay"></div>
-        <div id="answersList"></div>
+        <ul id="answersList"></ul>
         <div id="evaluation"></div>
         <div id="display"></div>
         <div id="finalScore"></div>
+        <button id="newGame">New Game!</button>
 
         <!-- jquery -->
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -26,6 +27,7 @@
         <script>
         window.onload = function(){
             // timer
+
             // questions
             var listquestionArray = [
                 {
@@ -34,17 +36,28 @@
                     wronganswers: ["Mr. Evil", "Lorne Michaels", "Anyone with Metamucil"],
             },];
             var currentQuestion = 0
-            $("#newGame").onclick(function() {
+            $("#newGame").click(function() {
                 var displayQuestion = listquestionArray[currentQuestion].listquestion;
-                $("#questionDisplay").text(displayQuestion);
+                var wronganswers = listquestionArray[currentQuestion].wronganswers;
+                var answer = listquestionArray[currentQuestion].answer;
                 wronganswers.push(answer);
+                console.log(wronganswers);
+                $("#questionDisplay").text(displayQuestion);
                 for(i = 0; i < wronganswers.length; i++){
-                    $("#answersList").appendchild("<li>").text(wronganswers[i]);
-
+                    var answerbutton = $("<li>").text(wronganswers[i]).attr("data", wronganswers[i]);;
+                    $("#answersList").prepend(answerbutton);
                     currentQuestion ++
                 }; 
             });
-            // evaluation
+            // 
+            $("li").click(function(){
+                if (this.data === answer){
+                    $("#evaluation").text("You're frickin' right!");
+                } else {
+                    $("#evaluation").text("So sorry. The correct answer was " + answer);
+                    
+                };
+            });
             // display
             // finalscore
             // newGame
