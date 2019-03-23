@@ -12,7 +12,7 @@
         <link rel="stylesheet" href="">
     </head>
     <body>
-        <div id="title"></div>
+        <div id="title">It's Trivia O'clock!</div>
         <div id="timer"></div>
         <div id="questionDisplay"></div>
         <div id="answersList"></div>
@@ -33,15 +33,17 @@
                     answer: "Dr. Evil",
                     wronganswers: ["Mr. Evil", "Lorne Michaels", "Anyone with Metamucil"],
             },];
-
             var currentQuestion = 0
-            var displayQuestion = listquestionArray[currentQuestion].listquestion;
-            $("#questionDisplay").text(displayQuestion);
-            wronganswers.push(answer);
-            for(i = 0; i < wronganswers.length; i++){
-                $("#answersList").appendchild("<li>").text(wronganswers[i]);
-            }; 
+            $("#newGame").onclick(function() {
+                var displayQuestion = listquestionArray[currentQuestion].listquestion;
+                $("#questionDisplay").text(displayQuestion);
+                wronganswers.push(answer);
+                for(i = 0; i < wronganswers.length; i++){
+                    $("#answersList").appendchild("<li>").text(wronganswers[i]);
 
+                    currentQuestion ++
+                }; 
+            });
             // evaluation
             // display
             // finalscore
