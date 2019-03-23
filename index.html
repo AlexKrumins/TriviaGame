@@ -14,8 +14,8 @@
     <body>
         <div id="title"></div>
         <div id="timer"></div>
-        <div id="question"></div>
-        <div id="answers"></div>
+        <div id="questionDisplay"></div>
+        <div id="answersList"></div>
         <div id="evaluation"></div>
         <div id="display"></div>
         <div id="finalScore"></div>
@@ -27,6 +27,21 @@
         window.onload = function(){
             // timer
             // questions
+            var listquestionArray = [
+                {
+                    listquestion: "Who does Number Two work for?",
+                    answer: "Dr. Evil",
+                    wronganswers: ["Mr. Evil", "Lorne Michaels", "Anyone with Metamucil"],
+            },];
+
+            var currentQuestion = 0
+            var displayQuestion = listquestionArray[currentQuestion].listquestion;
+            $("#questionDisplay").text(displayQuestion);
+            wronganswers.push(answer);
+            for(i = 0; i < wronganswers.length; i++){
+                $("#answersList").appendchild("<li>").text(wronganswers[i]);
+            }; 
+
             // evaluation
             // display
             // finalscore
