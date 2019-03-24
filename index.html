@@ -42,19 +42,19 @@
                     listquestion: "Who does Number Two work for?",
                     answer: "Dr. Evil",
                     allAnswers: ["Dr. Evil", "Mr. Evil", "Lorne Michaels", "Anyone with Metamucil"],
-                    image: "<img src='./assets/images/squirtle.png'/>",
+                    image: "<img src='./assets/images/MF0qT3I.gif'/>",
                 },
                 {
                     listquestion: "From what country to Fortune Cookies originate?",
                     answer: "USA",
                     allAnswers: ["USA","China", "Taiwan", "Thailand"],
-                    image: "<img src='./assets/images/pikachu.png'/>",
+                    image: "<img src='./assets/images/giphy.gif'/>",
                 },
                 {
                     listquestion: "If you were prompted to pick 'A', you would...",
                     answer: "A. Pick this one",
                     allAnswers: ["D. All of the above","C. Not pick this one", "B. Pick A", "A. Pick this one"],
-                    image: "<img src='./assets/images/pikachu.png'/>",
+                    image: "<img src='./assets/images/confused.gif'/>",
                 },
             ];
             
@@ -64,6 +64,7 @@
             $("#newGame").click(newPage)
             
             function newPage() {
+                $("#finalScore").empty();
                 $("#evaluation").empty();
                 $("#display").empty();
                 $("#newGame").addClass("hidden");
@@ -76,7 +77,7 @@
                     var answerbutton = $("<button>").text(allAnswers[i]).attr("data-name", allAnswers[i]).addClass("guess");
                     $("#answersList").prepend(answerbutton, '<br>');
                 };
-                fullTimer = 5;
+                fullTimer = 21;
                 startTimer();
                 $(".guess").click(checkGuess);
             };
@@ -90,22 +91,20 @@
                     $("#evaluation").text("So sorry. The correct answer was '" + questionData.answer + "'");
                     incorrectGuesses ++;
                 };
-                $("#newGame").removeClass("hidden").text("Next Question...");
                 $("#display").append(questionData.image).addClass('.img');
                 $("#questionDisplay").empty();
                 $("#answersList").empty();
+                $("#newGame").removeClass("hidden").text("Next Question...");
                 currentQuestion ++;
                 if (currentQuestion === listquestionArray.length){
-                    currentQuestion = 0;
-                    console.log("right" + correctGuesses);
-                    console.log("wrong" + incorrectGuesses);
-                    console.log("too long" + nonGuesses);
+                    finalScore();
+                }{
                 };
             };
 
             // TIMER
             var intervalId;
-            var fullTimer = 5;
+            var fullTimer;
             function startTimer(){
                 clearInterval(intervalId);
                 intervalId = setInterval(decrement, 1000);
@@ -124,6 +123,15 @@
             var correctGuesses = 0;
             var incorrectGuesses = 0;
             var nonGuesses = 0;
+
+            function finalScore() {
+                $("#newGame").removeClass("hidden").text("Try a New Game");
+                $("#finalScore").html("<h2>Congratulations on making it this far. There is nowhere else to go.</h2><h3>Here are you final scores<h3><p>Correct Answers: " + correctGuesses + "</p><p>Incorrect Answers: " + incorrectGuesses + "</p><p>The timer ran out before you could be bothered to answer: " + nonGuesses + "</p>");
+                currentQuestion = 0;
+                correctGuesses = 0;
+                incorrectGuesses = 0;
+                nonGuesses = 0;
+            };
             // newGame
         };
         </script>
