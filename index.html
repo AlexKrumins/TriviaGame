@@ -32,10 +32,10 @@
         <script>
         window.onload = function(){
             // timer
-            setTimeout(timesUp, 1000 * 20);
+            setTimeout(timesUp, 1000 * 5);
 
             function timesUp() {
-                
+                checkGuess();
             };
             // questions
             var listquestionArray = [
@@ -58,14 +58,16 @@
                     image: "<img src='./assets/images/pikachu.png'/>",
                 },
             ];
+            
             var currentQuestion = 0
+            var questionData;
             $("#newGame").click(newPage)
             
             function newPage() {
                 $("#evaluation").empty();
                 $("#display").empty();
-                $("#newGame").addClass("hidden")
-                var questionData = listquestionArray[currentQuestion];
+                $("#newGame").addClass("hidden");
+                questionData = listquestionArray[currentQuestion];
                 var displayQuestion = questionData.listquestion;
                 var allAnswers = questionData.allAnswers;
 
@@ -74,24 +76,25 @@
                     var answerbutton = $("<button>").text(allAnswers[i]).attr("data-name", allAnswers[i]).addClass("guess");
                     $("#answersList").prepend(answerbutton, '<br>');
                 }; 
-                
-                $(".guess").click(function(){
-                    if ($(this).attr("data-name") === questionData.answer){
-                        $("#evaluation").text("You're frickin' right!");
-                    } else {
-                        $("#evaluation").text("So sorry. The correct answer was '" + questionData.answer + "'");
-                    };
-                    $("#newGame").removeClass("hidden").text("Next Question...");
-                    $("#display").append(questionData.image);
-                    $("#questionDisplay").empty();
-                    $("#answersList").empty();
-                    currentQuestion ++;
-                    if (currentQuestion === listquestionArray.length){
-                        currentQuestion = 0;
-                    };
-                });
-            // 
+                $(".guess").click(checkGuess);
             };
+            
+            function checkGuess(){
+                if ($(this).attr("data-name") === questionData.answer){
+                    $("#evaluation").text("You're frickin' right!");
+                } else {
+                    $("#evaluation").text("So sorry. The correct answer was '" + questionData.answer + "'");
+                };
+                $("#newGame").removeClass("hidden").text("Next Question...");
+                $("#display").append(questionData.image);
+                $("#questionDisplay").empty();
+                $("#answersList").empty();
+                currentQuestion ++;
+                if (currentQuestion === listquestionArray.length){
+                    currentQuestion = 0;
+                };
+            };
+            // 
             // display
             // finalscore
             // newGame
