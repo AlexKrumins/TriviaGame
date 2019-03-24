@@ -13,7 +13,11 @@
         <style>
             .hidden{
                 display: none;
-            }
+            };
+            #display{
+                width: 200px;
+                object-fit: contain;
+            };
         </style>
     </head>
     <body>
@@ -31,12 +35,7 @@
         <!-- <script type="text/javascript" src="assets/javascript/app.js"></script> -->
         <script>
         window.onload = function(){
-            // timer
-            setTimeout(timesUp, 1000 * 5);
-
-            function timesUp() {
-                checkGuess();
-            };
+    
             // questions
             var listquestionArray = [
                 {
@@ -59,6 +58,7 @@
                 },
             ];
             
+            /////QUESTIONS
             var currentQuestion = 0
             var questionData;
             $("#newGame").click(newPage)
@@ -75,28 +75,55 @@
                 for(i = 0; i < allAnswers.length; i++){
                     var answerbutton = $("<button>").text(allAnswers[i]).attr("data-name", allAnswers[i]).addClass("guess");
                     $("#answersList").prepend(answerbutton, '<br>');
-                }; 
+                };
+                fullTimer = 5;
+                startTimer();
                 $(".guess").click(checkGuess);
             };
             
             function checkGuess(){
+                clearInterval(intervalId);
                 if ($(this).attr("data-name") === questionData.answer){
                     $("#evaluation").text("You're frickin' right!");
+                    correctGuesses ++;
                 } else {
                     $("#evaluation").text("So sorry. The correct answer was '" + questionData.answer + "'");
+                    incorrectGuesses ++;
                 };
                 $("#newGame").removeClass("hidden").text("Next Question...");
-                $("#display").append(questionData.image);
+                $("#display").append(questionData.image).addClass('.img');
                 $("#questionDisplay").empty();
                 $("#answersList").empty();
                 currentQuestion ++;
                 if (currentQuestion === listquestionArray.length){
                     currentQuestion = 0;
+                    console.log("right" + correctGuesses);
+                    console.log("wrong" + incorrectGuesses);
+                    console.log("too long" + nonGuesses);
                 };
             };
-            // 
-            // display
+
+            // TIMER
+            var intervalId;
+            var fullTimer = 5;
+            function startTimer(){
+                clearInterval(intervalId);
+                intervalId = setInterval(decrement, 1000);
+            };
+            function decrement() {
+                fullTimer--;
+                $("#timer").html(fullTimer);
+                if (fullTimer === 0) {
+                    incorrectGuesses --;
+                    nonGuesses ++;
+                    checkGuess();
+                };
+            };
+
             // finalscore
+            var correctGuesses = 0;
+            var incorrectGuesses = 0;
+            var nonGuesses = 0;
             // newGame
         };
         </script>
