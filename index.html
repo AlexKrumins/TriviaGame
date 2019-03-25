@@ -74,9 +74,10 @@
 
                 $("#questionDisplay").text(displayQuestion);
                 for(i = 0; i < allAnswers.length; i++){
-                    var answerbutton = $("<button>").text(allAnswers[i]).attr("data-name", allAnswers[i]).addClass("guess");
+                    var answerbutton = $("<button>").html(allAnswers[i]).attr("data-name", allAnswers[i]).addClass("guess");
                     $("#answersList").prepend(answerbutton, '<br>');
                 };
+                clearTimeout(timeoutId);
                 fullTimer = 21;
                 startTimer();
                 $(".guess").click(checkGuess);
@@ -84,6 +85,7 @@
             
             function checkGuess(){
                 clearInterval(intervalId);
+                startTimeout();
                 if ($(this).attr("data-name") === questionData.answer){
                     $("#evaluation").text("You're frickin' right!");
                     correctGuesses ++;
@@ -98,13 +100,17 @@
                 currentQuestion ++;
                 if (currentQuestion === listquestionArray.length){
                     finalScore();
-                }{
                 };
             };
 
             // TIMER
+            var timeoutId;
             var intervalId;
             var fullTimer;
+            function startTimeout(){
+                clearTimeout(timeoutId);
+                timeoutId = setTimeout(newPage, 1000 * 10);
+            };
             function startTimer(){
                 clearInterval(intervalId);
                 intervalId = setInterval(decrement, 1000);
@@ -125,6 +131,7 @@
             var nonGuesses = 0;
 
             function finalScore() {
+                clearTimeout(timeoutId);
                 $("#newGame").removeClass("hidden").text("Try a New Game");
                 $("#finalScore").html("<h2>Congratulations on making it this far. There is nowhere else to go.</h2><h3>Here are you final scores<h3><p>Correct Answers: " + correctGuesses + "</p><p>Incorrect Answers: " + incorrectGuesses + "</p><p>The timer ran out before you could be bothered to answer: " + nonGuesses + "</p>");
                 currentQuestion = 0;
