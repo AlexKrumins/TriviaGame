@@ -1,0 +1,38 @@
+.hidden{
+    display: none;
+}
+#display{
+    object-fit: contain;
+    padding-bottom: 10px;
+}
+#display img {
+    margin-bottom: 15px;
+    /* display: inline; */
+    margin-left: auto;
+    margin-right: auto;
+    height: 200px;
+}
+body {
+    width: 98%;
+    background-color: cornflowerblue;
+    size: 20pt;
+    text-align: center;
+    font-family: 'Baloo Chettan', cursive;
+    color: white;
+    text-shadow:
+          -1px -1px 0 #000,
+          1px -1px 0 #000,
+          -1px 1px 0 #000,
+          1px 1px 0 #000;
+}
+button {
+    align-content: center;
+    width: 77% ;
+    cursor: pointer;
+  
+}
+#game-container{
+    width: 50% ;
+    height: 480px;
+    margin: 60px;
+}

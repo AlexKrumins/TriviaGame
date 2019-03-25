@@ -1,147 +1,33 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Trivia of the questions</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
-        <style>
-            .hidden{
-                display: none;
-            };
-            #display{
-                width: 200px;
-                object-fit: contain;
-            };
-        </style>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>A trivia of ice and fire</title>
+    <link rel="stylesheet" type="text/css" href="./assets/css/reset.css">
+    <link href="https://fonts.googleapis.com/css?family=Baloo+Chettan" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+
     </head>
     <body>
-        <div id="title">It's Trivia O'clock!</div>
-        <div id="timer"></div>
-        <div id="questionDisplay"></div>
-        <ul id="answersList"></ul>
-        <div id="evaluation"></div>
-        <div id="display"></div>
-        <div id="finalScore"></div>
-        <button id="newGame">New Game!</button>
+        <div>
+            <div id="game-containter" class="container border border-warning rounded-lg h-75 d-inline-block">
+                <h1 id="title">It's Trivia O'clock!</h1>
+                <h2 id="timer">20</h2>
+                <h2 id="questionDisplay"></h2>
+                <ul id="answersList"></ul>
+                <div id="evaluation"></div>
+                <div id="display"></div>
+                <div id="finalScore"></div>
+                <button id="newGame" type="button" class="btn btn-secondary btn-lg btn-block mb-2">New Game!</button>
+                <button id="finalscorebutton" type="button" class="hidden btn btn-secondary btn-lg btn-block mb-2">Check out your final scores!</button>
 
+            </div>
+        </div>
         <!-- jquery -->
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <!-- <script type="text/javascript" src="assets/javascript/app.js"></script> -->
-        <script>
-        window.onload = function(){
-    
-            // questions
-            var listquestionArray = [
-                {
-                    listquestion: "Who does Number Two work for?",
-                    answer: "Dr. Evil",
-                    allAnswers: ["Dr. Evil", "Mr. Evil", "Lorne Michaels", "Anyone with Metamucil"],
-                    image: "<img src='./assets/images/MF0qT3I.gif'/>",
-                },
-                {
-                    listquestion: "From what country to Fortune Cookies originate?",
-                    answer: "USA",
-                    allAnswers: ["USA","China", "Taiwan", "Thailand"],
-                    image: "<img src='./assets/images/giphy.gif'/>",
-                },
-                {
-                    listquestion: "If you were prompted to pick 'A', you would...",
-                    answer: "A. Pick this one",
-                    allAnswers: ["D. All of the above","C. Not pick this one", "B. Pick A", "A. Pick this one"],
-                    image: "<img src='./assets/images/confused.gif'/>",
-                },
-            ];
-            
-            /////QUESTIONS
-            var currentQuestion = 0
-            var questionData;
-            $("#newGame").click(newPage)
-            
-            function newPage() {
-                $("#finalScore").empty();
-                $("#evaluation").empty();
-                $("#display").empty();
-                $("#newGame").addClass("hidden");
-                questionData = listquestionArray[currentQuestion];
-                var displayQuestion = questionData.listquestion;
-                var allAnswers = questionData.allAnswers;
-
-                $("#questionDisplay").text(displayQuestion);
-                for(i = 0; i < allAnswers.length; i++){
-                    var answerbutton = $("<button>").html(allAnswers[i]).attr("data-name", allAnswers[i]).addClass("guess");
-                    $("#answersList").prepend(answerbutton, '<br>');
-                };
-                clearTimeout(timeoutId);
-                fullTimer = 21;
-                startTimer();
-                $(".guess").click(checkGuess);
-            };
-            
-            function checkGuess(){
-                clearInterval(intervalId);
-                startTimeout();
-                if ($(this).attr("data-name") === questionData.answer){
-                    $("#evaluation").text("You're frickin' right!");
-                    correctGuesses ++;
-                } else {
-                    $("#evaluation").text("So sorry. The correct answer was '" + questionData.answer + "'");
-                    incorrectGuesses ++;
-                };
-                $("#display").append(questionData.image).addClass('.img');
-                $("#questionDisplay").empty();
-                $("#answersList").empty();
-                $("#newGame").removeClass("hidden").text("Next Question...");
-                currentQuestion ++;
-                if (currentQuestion === listquestionArray.length){
-                    finalScore();
-                };
-            };
-
-            // TIMER
-            var timeoutId;
-            var intervalId;
-            var fullTimer;
-            function startTimeout(){
-                clearTimeout(timeoutId);
-                timeoutId = setTimeout(newPage, 1000 * 10);
-            };
-            function startTimer(){
-                clearInterval(intervalId);
-                intervalId = setInterval(decrement, 1000);
-            };
-            function decrement() {
-                fullTimer--;
-                $("#timer").html(fullTimer);
-                if (fullTimer === 0) {
-                    incorrectGuesses --;
-                    nonGuesses ++;
-                    checkGuess();
-                };
-            };
-
-            // finalscore
-            var correctGuesses = 0;
-            var incorrectGuesses = 0;
-            var nonGuesses = 0;
-
-            function finalScore() {
-                clearTimeout(timeoutId);
-                $("#newGame").removeClass("hidden").text("Try a New Game");
-                $("#finalScore").html("<h2>Congratulations on making it this far. There is nowhere else to go.</h2><h3>Here are you final scores<h3><p>Correct Answers: " + correctGuesses + "</p><p>Incorrect Answers: " + incorrectGuesses + "</p><p>The timer ran out before you could be bothered to answer: " + nonGuesses + "</p>");
-                currentQuestion = 0;
-                correctGuesses = 0;
-                incorrectGuesses = 0;
-                nonGuesses = 0;
-            };
-            // newGame
-        };
-        </script>
-
+        <script type="text/javascript" src="assets/javascript/app.js"></script>
     </body>
 </html>
