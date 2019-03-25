@@ -64,13 +64,12 @@ window.onload = function(){
         $("#display").append(questionData.image);
         $("#questionDisplay").empty();
         $("#answersList").empty();
-        $("#newGame").removeClass("hidden").text("Next Question...");
         currentQuestion ++;
         if (currentQuestion === listquestionArray.length){
-          $("#newGame").addClass("hidden");
           $("#finalscorebutton").removeClass("hidden");
           startGameOver();
-        }{
+        }else{
+          $("#newGame").removeClass("hidden").text("Next Question...");
           startTimeout();
         };
     };
