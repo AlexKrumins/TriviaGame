@@ -22,7 +22,7 @@ window.onload = function(){
         },
     ];
     
-    /////QUESTIONS
+    /////QUESTIONS Manifested
     var currentQuestion = 0
     var questionData;
     $("#newGame").click(newPage)
@@ -116,7 +116,6 @@ window.onload = function(){
         incorrectGuesses = 0;
         nonGuesses = 0;
     };
-    // newGame
 };
 
 //ATTEMPT TO MAKE THE ANSWERS APPEAR IN RANDOM ORDER EVERY TIME
