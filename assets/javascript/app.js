@@ -135,7 +135,7 @@ window.onload = function(){
         clearTimeout(timeoutId);
         $("#finalscorebutton").addClass("hidden");
         $("#newGame").removeClass("hidden").text("Try a New Game");
-        $("#finalScore").html("<h2>Congratulations on making it this far. There is nowhere else to go.</h2><h3>Here are you final scores<h3><p>Correct Answers: " + correctGuesses + "</p><p>Incorrect Answers: " + incorrectGuesses + "</p><p>The timer ran out before you could be bothered to answer: " + nonGuesses + "</p>");
+        $("#finalScore").html("<h2>Congratulations on making it this far. There is nowhere else to go.</h2><h3>Here are your final scores<h3><p>Correct Answers: " + correctGuesses + "</p><p>Incorrect Answers: " + incorrectGuesses + "</p><p>The timer ran out before you could be bothered to answer: " + nonGuesses + "</p>");
         $("#evaluation").empty();
         $("#display").empty();currentQuestion = 0;
         correctGuesses = 0;
