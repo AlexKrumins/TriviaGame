@@ -20,6 +20,31 @@ window.onload = function(){
             allAnswers: ["D. All of the above","C. Not pick this one", "B. Pick A", "A. Pick this one"],
             image: "<img src='./assets/images/confused.gif'/>",
         },
+        {
+            listquestion: "Which of the following actors has NOT been cast as Spider-Man?",
+            answer: "Gil Faizon",
+            allAnswers: ["Tom Holland", "Andrew Garfield", "Gil Faizon", "Neil Patrick Harris", "Tobey Maguire"],
+            image: "<img src='./assets/images/spidermen.gif'/>",
+        },
+        {
+          listquestion: "Which of the following is NOT an attribute in the BSA Scout Law?",
+          answer: "Irreverent",
+          allAnswers: ["Irreverent","Clean","Brave","Thrifty","Cheerful","Obedient","Kind","Courteous","Friendly","Helpful","Loyal","Trustworthy"],
+          image: "<img src='./assets/images/scout.gif'/>",
+      },
+        {
+            listquestion: "If you are in a theatre, on a stage, facing upstage and someone enters the scene from your left, they are:",
+            answer: "Entering Stage Right",
+            allAnswers: ["Coming on Stage Left", "Entering Stage Right", "Exiting from off stage", "Entering House Right"],
+            image: "<img src='./assets/images/snagglepuss.gif'/>",
+        },
+        {
+            listquestion: "Which of the following words is the longest?",
+            answer: "smiles",
+            allAnswers: ["smiles","discombobulate", "antidisestablishmentarianism", "supercalifragilisticexpialidocious"],
+            punchline: "'smiles' has a 'mile' between each 's'<br>",
+            image: "<img src='./assets/images/LmrcJWs.gif'/>",
+        },
     ];
     
     /////QUESTIONS Manifested
@@ -61,6 +86,7 @@ window.onload = function(){
           $("#evaluation").text("So sorry. The correct answer was '" + questionData.answer + "'");
           incorrectGuesses ++;
         };
+        $("#display").append(questionData.punchline);
         $("#display").append(questionData.image);
         $("#questionDisplay").empty();
         $("#answersList").empty();
