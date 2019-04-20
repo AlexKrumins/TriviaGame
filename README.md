@@ -1,4 +1,5 @@
 # TriviaGame
+- https://alexkrumins.github.io/TriviaGame/
 # What the project does:
 The project provides the user with a quick test of trivia knowledge through timed, multiple choice questions.
 
