@@ -10,7 +10,7 @@
     /* display: inline; */
     margin-left: auto;
     margin-right: auto;
-    height: 200px;
+    height: 400px;
 }
 body {
     width: 98%;
@@ -35,4 +35,9 @@ button {
     width: 50% ;
     height: 480px;
     margin: 60px;
+}
+@media only screen and (max-width: 980px) {
+    #display img {
+        width: 96%;
+        height: auto;
 }
