@@ -1,5 +1,10 @@
 # TriviaGame
 - https://alexkrumins.github.io/TriviaGame/
+
+## Preview
+- Simply click the link above and test your knowledge on useless (aka trivial) knowledge.
+[![Preview Page](assets/images/preview.png)](https://alexkrumins.github.io/TriviaGame/)
+
 # What the project does:
 The project provides the user with a quick test of trivia knowledge through timed, multiple choice questions.
 
